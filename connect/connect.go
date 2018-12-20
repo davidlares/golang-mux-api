@@ -46,6 +46,16 @@ func CreateUser(user structures.User) structures.User {
   return user
 }
 
+func UpdateUser(id string, user structures.User) structures.User {
+  currentUser := structures.User{}
+  connection.Where("id = ?", id).First(&currentUser)
+  currentUser.Username = user.Username
+  currentUser.First_Name = user.First_Name
+  currentUser.Last_Name = user.Last_Name
+  connection.Save(&currentUser)
+  return currentUser
+}
+
 func CreateString() string {
   return username + ":" + password + "@/" + database
 }

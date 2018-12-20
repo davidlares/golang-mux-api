@@ -19,6 +19,7 @@ func main(){
   // handling URLs
   r.HandleFunc("/user/{id}", GetUser).Methods("GET")
   r.HandleFunc("/user/new", NewUser).Methods("POST")
+  r.HandleFunc("/user/update/{id}", UpdateUser).Methods("PATCH")
 
   log.Println("Server running on port 8000")
   log.Fatal(http.ListenAndServe(":8000", r))
@@ -54,4 +55,14 @@ func GetUserRequest(r* http.Request) structures.User {
     log.Fatal(err)
   }
   return user
+}
+
+func UpdateUser(w http.ResponseWriter, r* http.Request){
+  // getting ID
+  vars := mux.Vars(r)
+  user_id := vars["id"]
+  user := GetUserRequest(r)
+  response := structures.Response{"success", connect.UpdateUser(user_id, user), ""}
+  json.NewEncoder(w).Encode(response)
+
 }
