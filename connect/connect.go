@@ -35,12 +35,17 @@ func ConnectORM(stringConnection string) *gorm.DB {
   return connection
 }
 
-func CreateString() string {
-  return username + ":" + password + "@/" + database
-}
-
 func GetUser(id string) structures.User {
   user := structures.User{}
   connection.Where("id = ?", id).First(&user)
   return user
+}
+
+func CreateUser(user structures.User) structures.User {
+  connection.Create(&user) // and ID its assigned
+  return user
+}
+
+func CreateString() string {
+  return username + ":" + password + "@/" + database
 }
