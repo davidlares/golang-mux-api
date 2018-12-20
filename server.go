@@ -6,14 +6,8 @@ import (
   "github.com/gorilla/mux"
   "encoding/json"
   "./connect"
+  "./structures"
 )
-
-// JSON Struct
-type User struct {
-  Username string `json:"username"`
-  First_Name string `json:"first_name"`
-  Last_Name string `json:"last_name"`
-}
 
 func main(){
   // DB connection
@@ -30,11 +24,16 @@ func main(){
 
 func GetUser(w http.ResponseWriter, r* http.Request){
   // getting ID
-  // vars := mux.Vars(r)
-  // user_id := vars["id"]
+  vars := mux.Vars(r)
+  user_id := vars["id"]
 
-  // w.Write([]byte("Gorilla \n"))
-  user := User {"davidlares", "David","Lares"}
+  status := "success"
+  user := connect.GetUser(user_id)
+  if(user.Id <= 0){
+    status = "error"
+    message = "User not found."
+  }
+  response := structures.Response{status, user, message}
   // converting struct into response
-  json.NewEncoder(w).Encode(user)
+  json.NewEncoder(w).Encode(response)
 }

@@ -4,6 +4,7 @@ import (
   "log"
   "github.com/jinzhu/gorm"
  _ "github.com/jinzhu/gorm/dialects/mysql"
+ "../structures"
 )
 
 var connection *gorm.DB
@@ -36,4 +37,10 @@ func ConnectORM(stringConnection string) *gorm.DB {
 
 func CreateString() string {
   return username + ":" + password + "@/" + database
+}
+
+func GetUser(id string) structures.User {
+  user := structures.User{}
+  connection.Where("id = ?", id).First(&user)
+  return user
 }
