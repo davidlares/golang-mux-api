@@ -56,6 +56,12 @@ func UpdateUser(id string, user structures.User) structures.User {
   return currentUser
 }
 
+func DeleteUser(id string){
+  user := structures.User{}
+  connection.Where("id = ?", id).First(&user)
+  connection.Delete(&user)
+}
+
 func CreateString() string {
   return username + ":" + password + "@/" + database
 }

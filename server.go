@@ -20,6 +20,7 @@ func main(){
   r.HandleFunc("/user/{id}", GetUser).Methods("GET")
   r.HandleFunc("/user/new", NewUser).Methods("POST")
   r.HandleFunc("/user/update/{id}", UpdateUser).Methods("PATCH")
+  r.HandleFunc("/user/delete/{id}", DeleteUser).Methods("DELETE")
 
   log.Println("Server running on port 8000")
   log.Fatal(http.ListenAndServe(":8000", r))
@@ -64,5 +65,14 @@ func UpdateUser(w http.ResponseWriter, r* http.Request){
   user := GetUserRequest(r)
   response := structures.Response{"success", connect.UpdateUser(user_id, user), ""}
   json.NewEncoder(w).Encode(response)
+}
 
+func DeleteUser(w http.ResponseWriter, r* http.Request){
+  // getting ID
+  vars := mux.Vars(r)
+  user_id := vars["id"]
+  var user structures.USer
+  connect.DeleteUser(user_id)
+  response := structures.Response{"success", user, ""}
+  json.NewEncoder(w).Encode(response)
 }
