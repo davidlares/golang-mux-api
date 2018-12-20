@@ -1,4 +1,4 @@
-# davidGo-Api
+# davidGo-API
 
 Un simple proyecto Web API en GoLang para demostrar un CRUD de usuarios con GORM y Mux
 
