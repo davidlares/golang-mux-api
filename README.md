@@ -1,12 +1,12 @@
-## davidGo-API
+## MUX API
 
-Un simple proyecto Web API en GoLang para demostrar un CRUD de usuarios con GORM y Mux
+A simple GoLang Web API project to demonstrate user CRUD with GORM and Mux
 
-## Ejecutar proyecto
+## Run
   - go run server.go
 
-## Créditos
-[David E Lares S](https://davidlares.com)
+## Credits
+[David Lares S](https://davidlares.com)
 
-## Licencia
+## License
 [MIT](https://opensource.org/licenses/MIT)
