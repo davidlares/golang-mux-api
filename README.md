@@ -2,8 +2,9 @@
 
 A simple GoLang Web API project to demonstrate user CRUD with GORM and Mux
 
-## Run
-go run server.go
+## Usage
+
+Run: `go run server.go`
 
 ## Credits
 [David Lares S](https://davidlares.com)
